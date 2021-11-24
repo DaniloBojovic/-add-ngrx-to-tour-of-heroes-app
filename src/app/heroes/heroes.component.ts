@@ -28,7 +28,8 @@ export class HeroesComponent implements OnInit {
   }
 
   add(name: string): void {
-    const newItem: Hero = { id: 100, name: name };
+    let id = Math.max(...this.heroes.map((hero) => hero.id)) + 1;
+    const newItem: Hero = { id: id, name: name };
     this.store.dispatch(addHero(newItem));
     this.heroService.addHero({ name } as Hero).subscribe((hero) => {
       this.heroes.push(hero);
